@@ -50,7 +50,7 @@ public class OneTimePadMain
 
         for(int i=0;i<plainTextList.size();i++)
         {
-            int operationResult = plainTextList.get(i).binValue^keyList.get(i).binValue;
+            int operationResult = plainTextList.get(i).binValue ^ keyList.get(i).binValue;
             cipherTextList.add(new Element(getStringValue(elementList, operationResult), operationResult));
         }
 
@@ -58,14 +58,19 @@ public class OneTimePadMain
 
         for(int i=0;i<plainTextList.size();i++)
         {
-            int operationResult = cipherTextList.get(i).binValue^keyList.get(i).binValue;
+            int operationResult = cipherTextList.get(i).binValue ^ keyList.get(i).binValue;
             decryptPlaintextList.add(new Element(getStringValue(elementList, operationResult), operationResult));
         }
 
+        System.out.println("Element List");
         printList(elementList);
+        System.out.println("Plain Text List");
         printList(plainTextList);
+        System.out.println("Key List");
         printList(keyList);
+        System.out.println("Cipher List");
         printList(cipherTextList);
+        System.out.println("Decrypt List");
         printList(decryptPlaintextList);
 
         sc.close();
@@ -79,7 +84,7 @@ public class OneTimePadMain
         {
             if(inputList.get(i).ch.equals(ch))
             {
-                value=(i+1);
+                value=inputList.get(i).binValue;
                 break;
             }
         }
