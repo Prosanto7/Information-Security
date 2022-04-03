@@ -36,6 +36,7 @@ public class CeaserCipherMain
         String inputString = sc.next();
         System.out.print("Shift : ");
         int shift = sc.nextInt();
-        System.out.println("Ciper Text = "+new CeaserCipherMain().getCiperText(inputString, shift));       
+        System.out.println("Ciper Text = "+new CeaserCipherMain().getCiperText(inputString, shift));
+        sc.close();       
     }
 }

@@ -27,6 +27,7 @@ public class PlayFairCiperMain
         String plainText = sc.next();
         System.out.println("Key : ");
         String key = sc.next();
+        sc.close();
 
         System.out.println(new PlayFairCiperMain().getCiperText(plainText));
     }
