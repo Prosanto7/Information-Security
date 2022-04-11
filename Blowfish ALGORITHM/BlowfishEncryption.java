@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 
 // Java Program to demonstrate Blowfish encryption
 
@@ -373,25 +375,33 @@ public class BlowfishEncryption
 		String key = "aabb09182736ccdd";
 		keyGenerate(key);
 
-		String hexValue = ""; 
-
 		try {
 
 			BufferedReader bufferedReader = new BufferedReader(new FileReader("PlainText.txt"));
+			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("CiperText.txt"));
 			int input;
+			String cipherText = "";
+			String hexValue = ""; 
 
 			while((input=bufferedReader.read())!=-1)
 			{
 				hexValue = hexValue + Integer.toHexString(input);
+
+				if(hexValue.length()==16)
+				{
+					cipherText = cipherText + encrypt(hexValue) + "\n";
+					hexValue = "";
+				}
 			}
+			
+			bufferedWriter.write(cipherText);
+			bufferedWriter.close();
 			bufferedReader.close();
 
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
-
-		System.out.println(hexValue);
 	}
 
 	public static void main(String args[])

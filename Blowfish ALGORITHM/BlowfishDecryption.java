@@ -1,7 +1,10 @@
 // Java program to demonstrate
 // Blowfish decryption Algorithm
 
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 public class BlowfishDecryption{
 
@@ -315,9 +318,7 @@ public class BlowfishDecryption{
 		int j = 0;
 		for (int i = 0; i < P.length; i++) {
 			P[i] = xor(P[i], key.substring(j, j + 8));
-			System.out.println("subkey "
-							+ (i + 1) + ": "
-							+ P[i]);
+			//System.out.println("subkey "+ (i + 1) + ": "+ P[i]);
 			j = (j + 8) % key.length();
 		}
 	}
@@ -332,8 +333,7 @@ public class BlowfishDecryption{
 		String fOut = f(left); // output from F function
 		right = xor(fOut, right);
 
-		System.out.println("round " + time + ": "
-						+ right + left);
+		//System.out.println("round " + time + ": "+ right + left);
 
 		// swap left and right
 		return right + left;
@@ -353,21 +353,51 @@ public class BlowfishDecryption{
 		return left + right;
 	}
 
+	public static String hexToString(String hex)
+    {
+        StringBuffer sb = new StringBuffer();
+        char charArray[] = hex.toCharArray();
+
+        for(int i=0;i<charArray.length;i=i+2)
+        {
+            String s = ""+charArray[i]+charArray[i+1];
+            char ch = (char) Integer.parseInt(s,16);
+            sb.append(ch);
+        }
+
+        return sb.toString();
+    }
+
 	BlowfishDecryption()
 	{
 		// storing 2^32 in modVal
 		//(<<1 is equivalent to multiply by 2)
 		for (int i = 0; i < 32; i++)
 			modVal = modVal << 1;
-		String cipherText = "d748ec383d3405f7";
-		String key = "aabb09182736ccdd";
 
+		String key = "aabb09182736ccdd";
 		keyGenerate(key);
 
-		System.out.println("-----Decryption-----");
-		String plainText = decrypt(cipherText);
-		System.out.println("Plain Text: "
-						+ plainText);
+		try {
+
+			BufferedReader bufferedReader = new BufferedReader(new FileReader("CiperText.txt"));
+			BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("DecryptedCiperText.txt"));
+			String plainText = "";
+			String hexValue = ""; 
+
+			while((hexValue=bufferedReader.readLine())!=null)
+			{
+				plainText = plainText + decrypt(hexValue);
+			}
+
+			bufferedWriter.write(hexToString(plainText));
+			bufferedWriter.close();
+			bufferedReader.close();
+
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String args[])

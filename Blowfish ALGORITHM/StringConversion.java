@@ -1,5 +1,3 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.Scanner;
 
 public class StringConversion
@@ -41,25 +39,5 @@ public class StringConversion
         System.out.println(stringToHex(input));
         System.out.println(hexToString(stringToHex(input)));
         sc.close();
-
-        String hexValue = ""; 
-
-		try {
-
-			BufferedReader bufferedReader = new BufferedReader(new FileReader("PlainText.txt"));
-			int in;
-
-			while((in=bufferedReader.read())!=-1)
-			{
-				hexValue = hexValue + Integer.toHexString(in);
-			}
-			bufferedReader.close();
-
-		} catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		System.out.println(hexValue);
     }
 }
