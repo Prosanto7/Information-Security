@@ -371,6 +371,7 @@ public class BlowfishEncryption
 		//Plaintext will be 16 Hexadecimal Bits	
 		//String plainText = "123456abcd132536"; 
 
+		long start = System.currentTimeMillis();
 
 		String key = "aabb09182736ccdd";
 		keyGenerate(key);
@@ -402,6 +403,10 @@ public class BlowfishEncryption
 		{
 			e.printStackTrace();
 		}
+
+		long end = System.currentTimeMillis();
+
+		System.out.println("Encryption Excecution Time : "+(end-start)/1000+" seconds");
 	}
 
 	public static void main(String args[])

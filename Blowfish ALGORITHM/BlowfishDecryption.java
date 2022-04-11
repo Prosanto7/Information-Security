@@ -375,6 +375,8 @@ public class BlowfishDecryption{
 		for (int i = 0; i < 32; i++)
 			modVal = modVal << 1;
 
+		long start = System.currentTimeMillis();
+
 		String key = "aabb09182736ccdd";
 		keyGenerate(key);
 
@@ -398,6 +400,10 @@ public class BlowfishDecryption{
 		{
 			e.printStackTrace();
 		}
+
+		long end = System.currentTimeMillis();
+
+		System.out.println("Decryption Excecution Time : "+(end-start)/1000+" seconds");
 	}
 
 	public static void main(String args[])
